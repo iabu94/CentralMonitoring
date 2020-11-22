@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Realtime Chart</title>
+    @Scripts.Render("~/Scripts/cdjcv.js")
+</head>
+<body style="margin:0px">
+    <table cellspacing="0" cellpadding="0" border="0">
+        <tr>
+            <td align="right" colspan="2" style="background:#000088; color:#ffff00; padding:0px 4px 2px 0px;">
+                <a style="color:#FFFF00; font:italic bold 10pt Arial; text-decoration:none" href="http://www.advsofteng.com/">
+                    Advanced Software Engineering
+                </a>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <div style="font: bold 20pt Arial; margin:5px 0px 0px 5px;">
+                    Simple Realtime Chart
+                </div>
+                <hr style="border:solid 1px #000080" />
+                <div style="padding:0px 5px 5px 10px">
+                    <!-- ****** Here is the chart viewer ****** -->
+                    @Html.Raw(ViewBag.Viewer.RenderHTML())
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+    function timerTick()
+    {
+        JsChartViewer.get('@ViewBag.Viewer.ID').streamUpdate();
+    }
+    window.setInterval("timerTick()", 1000);
+    </script>
+</body>
+</html>
